@@ -4,8 +4,8 @@ import * as Icon from 'react-bootstrap-icons';
 import millify from 'millify';
 
 const Crypto = () => {
-	const { data, isFetching } = useGetAssetsQuery({
-		pollingInterval: 3000,
+	const { data, isFetching } = useGetAssetsQuery(0, {
+		pollingInterval: 1000,
 		skipPollingIfUnfocused: true,
 	});
 	console.log(data);
@@ -37,11 +37,11 @@ const Crypto = () => {
 				return value >= 0 ? (
 					<p className='text-success'>
 						<Icon.CaretUpFill />
-						{num}
+						{num}%
 					</p>
 				) : (
 					<p className='text-danger'>
-						<Icon.CaretDownFill /> {num * -1}
+						<Icon.CaretDownFill /> {num * -1}%
 					</p>
 				);
 			},
@@ -68,14 +68,28 @@ const Crypto = () => {
 		{
 			label: 'Max Supply',
 			key: 'maxSupply',
-			formatter: (value) => Number.parseFloat(value || 0).toFixed(0),
+			formatter: (value, row) => millify(value || 0) + ' ' + row.symbol,
 			classname: 'text-end',
 		},
 	];
-	if (isFetching) return <div>Fetching data</div>;
+	// if (isFetching) return <div>Fetching data</div>;
 	return (
 		<div>
-			<Table classname={'table-striped'} header={header} data={data.data} />
+			<h1>
+				Real time data fetched at{' '}
+				{new Date(data?.timestamp).toLocaleTimeString()}{' '}
+				{isFetching && (
+					<div className='spinner-grow text-success' role='status'>
+						<span className='visually-hidden'>Loading...</span>
+					</div>
+				)}
+			</h1>
+			<Table
+				sortBy={(a, b) => b.changePercent24Hr - a.changePercent24Hr}
+				classname={'table-striped'}
+				header={header}
+				data={data?.data}
+			/>
 		</div>
 	);
 };

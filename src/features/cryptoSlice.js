@@ -8,7 +8,7 @@ export const cryptoSlice = createApi({
 	}),
 	endpoints: (builder) => ({
 		getAssets: builder.query({
-			query: () => `assets`,
+			query: () => `/assets`,
 		}),
 	}),
 });
