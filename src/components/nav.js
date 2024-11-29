@@ -1,4 +1,4 @@
-import { paths } from '../constants';
+import { paths } from '../router/constants';
 export const Nav = () => {
 	return (
 		<nav className='navbar navbar-expand-lg bg-body-tertiary'>

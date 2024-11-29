@@ -3,7 +3,7 @@ import { Nav } from './components/nav';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PostDetails from './components/PostDetails';
 import Footer from './components/Footer';
-import { paths } from './constants';
+import { paths } from './router/constants';
 
 function App() {
 	useEffect(() => {
