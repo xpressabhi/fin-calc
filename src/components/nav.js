@@ -24,13 +24,15 @@ export const Nav = () => {
 								Home
 							</a>
 						</li>
-						{paths.map(({ path, label }) => (
-							<li className='nav-item' key={path}>
-								<a className='nav-link' href={path}>
-									{label}
-								</a>
-							</li>
-						))}
+						{paths
+							.filter((p) => !p.hide)
+							.map(({ path, label }) => (
+								<li className='nav-item' key={path}>
+									<a className='nav-link' href={path}>
+										{label}
+									</a>
+								</li>
+							))}
 					</ul>
 				</div>
 			</div>

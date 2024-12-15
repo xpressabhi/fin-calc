@@ -9,8 +9,11 @@ export const cryptoSlice = createApi({
 	endpoints: (builder) => ({
 		getAssets: builder.query({
 			query: () => `/assets`,
+		}), // curl --location 'api.coincap.io/v2/exchanges'
+		getExchanges: builder.query({
+			query: () => '/exchanges',
 		}),
 	}),
 });
 
-export const { useGetAssetsQuery } = cryptoSlice;
+export const { useGetAssetsQuery, useGetExchangesQuery } = cryptoSlice;

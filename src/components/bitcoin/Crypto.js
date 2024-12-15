@@ -1,11 +1,11 @@
 import { useGetAssetsQuery } from '../../features/cryptoSlice';
-import Table from '../table/Table';
+import TableFilter from '../table/TableFilter';
 import * as Icon from 'react-bootstrap-icons';
 import millify from 'millify';
 
 const Crypto = () => {
 	const { data, isFetching } = useGetAssetsQuery(0, {
-		pollingInterval: 1000,
+		pollingInterval: 5000,
 		skipPollingIfUnfocused: true,
 	});
 	console.log(data);
@@ -84,11 +84,12 @@ const Crypto = () => {
 					</div>
 				)}
 			</h1>
-			<Table
-				sortBy={(a, b) => b.changePercent24Hr - a.changePercent24Hr}
+			<TableFilter
 				classname={'table-striped'}
 				header={header}
 				data={data?.data}
+				pagination
+				pageSize={25}
 			/>
 		</div>
 	);
